@@ -1,0 +1,15 @@
+.title {
+	text-align: center;
+	text-transform: uppercase;
+	font-family: verdana;
+}
+
+.byline {
+	text-transform: uppercase;
+	font-family: verdana;
+}
+
+#map1 {
+	height: 800px;
+	width: 100%;
+}

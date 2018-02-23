@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Tom Percival">
+	<meta lang="en-AU">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Geography of Australia</title>
+	<link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+	<h1 class="title">Geography of Australia</h1>					<!--Title and Byline of page-->
+	<h2 class="byline">Australian Capital Cities</h2>
+	<div id="map1"></div>
+	<script>
+		var map1;
+		var auspeaks = './AusPeaks.kml';
+
+      function initMap() {											/* function that produces the map*/
+      	var pinColor = "EA7F38";									/* creating two custom pinpoints used to mark cities*/
+      	var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+      		new google.maps.Size(21, 34),
+    		new google.maps.Point(0,0),
+    		new google.maps.Point(10, 34));
+
+      	var capColor = "FFE249";
+		var capImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + capColor,
+			new google.maps.Size(21, 34),
+    		new google.maps.Point(0,0),
+    		new google.maps.Point(10, 34));
+
+        var aust = {lat: -25.274, lng: 133.775};		/*setting locations of cities and centre of Australia as variables*/
+        var adelaide = {lat: -34.929, lng: 138.601};
+        var darwin = {lat: -12.463, lng: 130.846};
+        var perth = {lat: -31.951, lng: 115.861};
+        var brisbane = {lat: -27.470, lng: 153.025};
+        var sydney = {lat: -33.868, lng: 151.209};
+        var melbourne = {lat: -37.814, lng: 144.963};
+        var canberra = {lat: -35.281, lng: 149.130};
+        var hobart = {lat: -42.882, lng: 147.327};
+        
+        map1 = new google.maps.Map(document.getElementById('map1'), {		/*Initialise map, centre to centre of Australia*/
+          zoom: 4,
+          zoomControl: true,
+          scaleControl: true,
+          center: aust,
+          mapTypeId: 'terrain'
+        });
+        var kmlPeaks = new google.maps.KmlLayer(auspeaks, {			/*testing - add KML data to map*/
+        	suppressInfoWindows: true,
+        	preserveViewport: false,
+        	map: map1
+        });
+        var adelmarker = new google.maps.Marker({			/*Create markers for each city*/
+          position: adelaide,
+          map: map1,
+          icon: pinImage
+        });
+        var darmarker = new google.maps.Marker({
+          position: darwin,
+          map: map1,
+          icon: pinImage
+        });
+        var perthmarker = new google.maps.Marker({
+          position: perth,
+          map: map1,
+          icon: pinImage
+        });
+        var brismarker = new google.maps.Marker({
+          position: brisbane,
+          map: map1,
+          icon: pinImage
+        });
+        var sydmarker = new google.maps.Marker({
+          position: sydney,
+          map: map1,
+          icon: pinImage
+        });
+        var melbmarker = new google.maps.Marker({
+          position: melbourne,
+          map: map1,
+          icon: pinImage
+        });
+        var canbmarker = new google.maps.Marker({
+          position: canberra,
+          map: map1,
+          icon: capImage
+        });
+        var hobmarker = new google.maps.Marker({
+          position: hobart,
+          map: map1,
+          icon: pinImage
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+        	content: 'Population here',
+        	opened: false,
+        	position: aust
+        });
+        adelmarker.addListener( 'click', function(){		/* set city info to pop-up when that city is clicked*/
+        	infowindow.setContent('<h2>Adelaide</h2><p>Established: 1836</p><p>Population: 1,716,966 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(adelaide);
+        	infowindow.opened = true;			/* boolean to check if a city info pop-up is displayed*/
+        	infowindow.open(map1);
+        });
+
+        darmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Darwin</h2><p>Established: 1869</p><p>Population: 136,828 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(darwin);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        perthmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Perth</h2><p>Established: 1829</p><p>Population: 1,943,858 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(perth);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        brismarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Brisbane</h2><p>Established: 1824</p><p>Population: 2,270,800 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(brisbane);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        sydmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Sydney</h2><p>Established: 1788</p><p>Population: 4,823,991 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(sydney);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        melbmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Melbourne</h2><p>Established: 1835</p><p>Population: 4,485,211 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(melbourne);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        canbmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Canberra</h2><p>Established: 1913</p><p>Population: 395,790 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(canberra);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        hobmarker.addListener( 'click', function(){
+        	infowindow.setContent('<h2>Hobart</h2><p>Established: 1804</p><p>Population: 222,356 (ABS 2016 Census)</p>');
+        	infowindow.setPosition(hobart);
+        	infowindow.opened = true;
+        	infowindow.open(map1);
+        });
+
+        infowindow.addListener('closeclick', function(){	/* if the pop-up is closed, change the boolean check variable */
+        	infowindow.opened = false;
+        });
+
+        map1.addListener( 'click', function(){		/*close pop-up if user clicks elsewhere on the map*/
+        	if (infowindow.opened == true)
+        	{
+        		infowindow.close(map1);
+        		infowindow.opened = false;
+        	}
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=KEY_GOES_HERE&callback=initMap">
+    </script>			<!-- use key to allow use of Google Maps APIs -->
+</body>
+</html>
